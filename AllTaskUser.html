@@ -1,0 +1,322 @@
+<script src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Online/Dashboard/AllTaskUser.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/alasql/0.4.11/alasql.min.js"></script>
+<script src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Dashboard/CreateTaskUser.js"></script>
+<script src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Dashboard/EditTaskUser.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#contacttabs").tabs();
+        $('#contacttabs').tabs("option", "active", 0);
+    });
+</script>
+<style>
+    #ctl00_mpBody {
+        margin-right: 0px;
+    }
+	
+	/*** for table use ***/
+     .page-content {
+        width: auto !important;
+        margin-right: 36px !important;
+        height: auto !important;
+        margin-left: -25px !important;
+    }
+	
+    .for-lis {
+        display: inline-flex;
+        width: 100%;
+        padding: 5px;
+    }
+    .pt-0 {
+        padding-top: 0px !important;
+    }
+    .padLR {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+    .arrow_up {
+        margin-top: -4px;
+        cursor: pointer;
+        margin-left: 4px;
+    }
+    .arrow_down {
+        margin-top: 10px;
+        cursor: pointer;
+        margin-left: 4px;
+    }
+    .glyphicon {
+        right: auto !important;
+    }
+    .for-c0l {
+        background: #e7e3e3 !important;
+        border: 1px solid #fff;
+    }
+ 
+    .for-c02 {
+        background: #f7f5f5 !important;
+        border: 1px solid #fff;
+    }
+ 
+    .for-c03 {
+        background: #fff !important;
+        border: 1px solid #eee;
+    }
+ 
+    .tdrows {
+        border: 1px solid #f2f2f2 !important;
+    }
+ 
+    .project_active {
+        background: #cecccc !important;
+        }
+ 
+    .section-event .searchclear {
+        right: auto !important;
+        margin-left: -19px;
+        bottom: auto;
+        top: 11px !important;
+    }
+ 
+    .glyphicon_active {
+        right: auto !important;
+    }
+ 
+    .width-90{width: 90%;}
+    .ml5{margin-left:10px;}
+    .ml20{margin-left:28px;}
+    .ml35{margin-left:45px;}
+</style>
+<div ng-controller="TaskUserController" ng-cloak>
+    <div class="" ng-cloak>
+        <div class="panel-body">
+            <div class="row Doc-align">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-5">
+                    <input id="searchinput" type="search" ng-model="search" placeholder="Search all..." class="form-control searchbox_height" autocomplete="off">
+                    <span class="searchclear" ng-click="clearControl('searchinput')">X</span>
+                </div>
+                <div class="col-sm-3">
+                    <label class="full_width">Showing {{filtered.length}} of {{taskUser.length}} Team Members</label>
+                    <label class="full-width"> Showing {{filteredItem.length}} of {{TaskGroup.length}} Team Groups</label>
+                </div>
+                <div class="col-sm-1">
+                    <a data-ng-click="ClearFilters()" class="hreflink pull-right">Clear All <img ng-src="/_layouts/images/delete.gif"></a>
+                </div>
+                <div class="col-sm-1 print-icon">
+                    <img ng-if="Siteurl=='/cep'" class="pull-right" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/24/icon_Printerce.png" ng-click="printResults()" />
+                    <img ng-if="Siteurl!='/cep'" class="pull-right" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/24/icon_Printer.png" ng-click="printResults()" />
+                    <img class="pull-right" ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/24/icon_excel.png" ng-click="exportToExcel()" />
+                </div>
+
+            </div>
+
+
+
+            <div id="contacttabs" class="exTab3">
+                <ul class="nav nav-pills">
+                    <li>
+                        <a data-toggle="tab" href="#TaskUser">Team Members</a>
+                    </li>
+                    <li>
+                        <a data-toggle="tab" href="#TaskGroup">Team Groups</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div id="TaskUser">
+                        <div class="container form-group"><button type="button" class="btn btn-primary pull-right" ng-bind-html="GetColumnDetails('CreateUser') | trustedHTML" ng-click="CreateUser('taskUser')"></button></div>
+                        <div id="table-wrapper" class="section-event pt-0">
+                            
+                                <ul id="task" class="table table-hover" width="100%">
+                                    
+                                    <li class="for-lis">
+                                        <div style="width: 6%;"><div style="width:80%;"></div></div>
+
+                                        <div style="width:14%;" id="searchName">
+
+                                            <div style="width:80%;" class="headcontainer">
+                                                <input id="searchName" type="search" placeholder="Search Name" class="width-90 searchbox_height" ng-model="searchName" />
+                                                <span ng-show="searchName.length>0" class="searchclear" ng-click="clearControl('searchName')">X</span>
+                                                <span class="{{orderBy=='Title'&&!reverse?'glyphicon_active':'glyphicon'}}  glyphicon-chevron-up direction-arrow arrow_up" ng-click="sortBy('Title', false)"></span>
+                                                <span class="{{orderBy=='Title'&&reverse?'glyphicon_active':'glyphicon'}}  glyphicon-chevron-down direction-arrow arrow_down" ng-click="sortBy('Title', true)"></span>
+
+                                            </div>
+                                        </div>
+
+                                        <div style="width:8%;" id="searchUserType">
+                                            <div style="width:80%;" class="headcontainer">
+                                                <input id="searchUserType" type="search" placeholder="Search User Type" class="width-90 searchbox_height" ng-model="searchUserType" />
+                                                <span ng-show="searchUserType.length>0" class="searchclear" ng-click="clearControl('searchUserType')">X</span>
+                                                <span class="{{orderBy=='UserType'&&!reverse?'glyphicon_active':'glyphicon'}}  glyphicon-chevron-up direction-arrow arrow_up" ng-click="sortBy('UserType', false)"></span>
+                                                <span class="{{orderBy=='UserType'&&reverse?'glyphicon_active':'glyphicon'}}  glyphicon-chevron-down direction-arrow arrow_down" ng-click="sortBy('UserType', true)"></span>
+
+                                            </div>
+                                        </div>
+
+                                        <div style="width:15%;" id="searchGroup">
+                                            <div style="width:80%;" class="headcontainer">
+                                                <input id="searchGroup" type="search" placeholder="Search Group" class="width-90 searchbox_height" ng-model="searchGroup" />
+                                                <span ng-show="searchGroup.length>0" class="searchclear" ng-click="clearControl('searchGroup')">X</span>
+                                                <span class="{{orderBy=='usertitle'&&!reverse?'glyphicon_active':'glyphicon'}}  glyphicon-chevron-up direction-arrow arrow_up" ng-click="sortBy('usertitle', false)"></span>
+                                                <span class="{{orderBy=='usertitle'&&reverse?'glyphicon_active':'glyphicon'}}  glyphicon-chevron-down direction-arrow arrow_down" ng-click="sortBy('usertitle', true)"></span>
+
+                                            </div>
+                                        </div>
+                                        <div style="width:7%;" id="searchsortorder">
+                                            <div style="width:80%;" class="headcontainer">
+                                                <input id="searchsortorder" type="search" placeholder="Sort Order" class="width-90 searchbox_height" ng-model="searchsortorder" />
+                                                <span ng-show="searchsortorder.length>0" class="searchclear" ng-click="clearControl('searchsortorder')">X</span>
+                                                <span class="{{orderBy=='SortOrder'&&!reverse?'glyphicon_active':'glyphicon'}}  glyphicon-chevron-up direction-arrow arrow_up" ng-click="sortBy('SortOrder', false)"></span>
+                                                <span class="{{orderBy=='SortOrder'&&reverse?'glyphicon_active':'glyphicon'}}  glyphicon-chevron-down direction-arrow arrow_down" ng-click="sortBy('SortOrder', true)"></span>
+
+                                            </div>
+                                        </div>
+                                        <div style="width:21%;" id="searchrole">
+                                            <div style="width:80%;" class="headcontainer">
+                                                <input id="searchrole" type="search" placeholder="Roles"
+                                                       class="width-90 searchbox_height"
+                                                       ng-model="searchrole" />
+                                                <span ng-show="searchrole.length>0" class="searchclear"
+                                                      ng-click="clearControl('searchrole')">X</span>
+                                                <span class="{{orderBy=='Userrole'&&!reverse?'glyphicon_active':'glyphicon'}}  glyphicon-chevron-up direction-arrow arrow_up"
+                                                      ng-click="sortBy('Userrole', false)"></span>
+                                                <span class="{{orderBy=='Userrole'&&reverse?'glyphicon_active':'glyphicon'}}  glyphicon-chevron-down direction-arrow arrow_down"
+                                                      ng-click="sortBy('Userrole', true)"></span>
+
+                                            </div>
+                                        </div>
+                                        <div style="width:12%;" id="searchcompany">
+                                            <div style="width:80%;" class="headcontainer">
+                                                <input id="searchcompany" type="search" placeholder="Company"
+                                                       class="width-90 searchbox_height"
+                                                       ng-model="searchcompany" />
+                                                <span ng-show="searchcompany.length>0" class="searchclear"
+                                                      ng-click="clearControl('searchcompany')">X</span>
+                                                <span class="{{orderBy=='Company'&&!reverse?'glyphicon_active':'glyphicon'}}  glyphicon-chevron-up direction-arrow arrow_up"
+                                                      ng-click="sortBy('Company', false)"></span>
+                                                <span class="{{orderBy=='Company'&&reverse?'glyphicon_active':'glyphicon'}}  glyphicon-chevron-down direction-arrow arrow_down"
+                                                      ng-click="sortBy('Company', true)"></span>
+
+                                            </div>
+                                        </div>
+                                        <div style="width:13%;" id="searchManager">
+                                            <div style="width:80%;" class="headcontainer">
+                                                <input id="searchManager" type="search" placeholder="Approver"
+                                                       class="width-90 searchbox_height"
+                                                       ng-model="searchManger" />
+                                                <span ng-show="searchManger.length>0" class="searchclear"
+                                                      ng-click="clearControl('searchManager')">X</span>
+                                                <span class="{{orderBy=='UserManagerName'&&!reverse?'glyphicon_active':'glyphicon'}}  glyphicon-chevron-up direction-arrow arrow_up"
+                                                      ng-click="sortBy('UserManagerName', false)"></span>
+                                                <span class="{{orderBy=='UserManagerName'&&reverse?'glyphicon_active':'glyphicon'}}  glyphicon-chevron-down direction-arrow arrow_down"
+                                                      ng-click="sortBy('UserManagerName', true)"></span>
+
+                                            </div>
+                                        </div>
+                                        <div style="width: 2%;"><div style="width: 80%;"></div></div>
+                                        <div style="width: 2%;"><div style="width: 80%;"></div></div>
+                                    </li>
+                                    <div class="container-new">
+                                        <li class="for-lis tdrows" ng-repeat="item in filtered = (taskUser | orderBy:orderBy:reverse | filter:search | filter:{Title:searchName,Institution:searchinstitution,UserType:searchUserType,usertitle:searchGroup,SortOrder:searchsortorder,Userrole:searchrole,Company:searchcompany,UserManagerName:searchManger})">
+
+                                            <div style="width: 6%;">
+
+                                                <!-- <img style="width: 28px;" ng-if="item.Item_x005F_x0020_Cover==undefined && item.Item_x005F_x0020_Cover==null " ng-src="https://www.shareweb.ch/site/ei/Style%20Library/Images/ContactPicture.jpg" />-->
+                                                <div class="text-center title2_taskuser contact ng-binding" title="{{item.Title}}" ng-if="item.Item_x005F_x0020_Cover==undefined" ui-draggable="true" drag="item" on-drop-success="dropSuccessHandler($event, $index, group.childs">{{item.Suffix}}</div>
+                                                <img style="width: 28px;" ng-if="item.Item_x005F_x0020_Cover!=undefined" title="{{item.Title}}" ng-src="{{item.Item_x005F_x0020_Cover}}" />
+                                            </div>
+                                            <div style="width: 14%;" class="padLR">
+                                                <span style="cursor: pointer;">{{item.Title}}</span>
+                                                <span ng-if="item.Suffix !=undefined">  ({{item.Suffix}})</span>
+                                            </div>
+                                            <div style="width: 8%;" class="padLR"> {{item.UserType}}</div>
+                                            <div style="width: 15%;" class="padLR"> {{item.usertitle}}</div>
+                                            <div style="width: 7%;" class="padLR"> {{item.SortOrder}}</div>
+                                            <div style="width:22%;"> {{item.Userrole}}</div>
+                                            <div style="width:12%;"> {{item.Company}}</div>
+                                            <div style="width:13%;"> {{item.UserManagerName}}</div>
+                                            <div style="width: 2%;" class="padLR">
+                                                <a class="hreflink">
+                                                    <img ng-click="EditUser(item)" ng-src="/_layouts/images/edititem.gif">
+                                                </a>
+                                            </div>
+                                            <div style="width: 2%;" class="padLR"><a class="hreflink" ng-click="removeItem(item,taskUser)"> <img ng-src="/_layouts/images/delete.gif" src="/_layouts/images/delete.gif"></a></div>
+                                        </li>
+                                    </div>
+                                </ul>
+
+                        </div>
+                    </div>
+                    <div id="TaskGroup">
+                        <div class="container form-group"><button type="button" class="btn btn-primary pull-right" ng-bind-html="GetColumnDetails('CreateGroup') | trustedHTML" ng-click="Creategroup('taskgroup')"></button></div>
+                        <div id="table-wrapper" class="section-event pt-0">
+                            
+                                <ul id="task" class="table table-hover" cellspacing="0" width="100%">
+                                    
+                                        <li class="for-lis">
+                                            <div style="width: 3%;"><div style="width: 80%;"></div></div>
+
+                                            <div style="width:30%;" id="searchNameTask">
+                                               
+                                                <div style="width:80%;" class="headcontainer">
+                                                    <input id="searchNameTask" type="search" placeholder="Search Name" class="width-90 searchbox_height" ng-model="searchNameTask" />
+                                                    <span ng-show="searchNameTask.length>0" class="searchclear" ng-click="clearControl('searchNameTask')">X</span>
+                                                    <span class="{{orderBy=='Title'&&!reverse?'glyphicon_active':'glyphicon'}}  glyphicon-chevron-up direction-arrow arrow_up" ng-click="sortBy('Title', false)"></span>
+                                                    <span class="{{orderBy=='Title'&&reverse?'glyphicon_active':'glyphicon'}}  glyphicon-chevron-down direction-arrow arrow_down" ng-click="sortBy('Title', true)"></span>
+
+                                                </div>
+                                            </div>
+                                            <div style="width:30%;" id="searchUserTypeTask">
+                                              
+                                                <div style="width:80%;" class="headcontainer">
+                                                    <input id="searchUserTypeTask" type="search" placeholder="Search UserType" class="width-90 searchbox_height" ng-model="searchUserTypeTask" />
+                                                    <span ng-show="searchUserTypeTask.length>0" class="searchclear" ng-click="clearControl('searchUserTypeTask')">X</span>
+                                                    <span class="{{orderBy=='UserType'&&!reverse?'glyphicon_active':'glyphicon'}}  glyphicon-chevron-up direction-arrow arrow_up" ng-click="sortBy('UserType', false)"></span>
+                                                    <span class="{{orderBy=='UserType'&&reverse?'glyphicon_active':'glyphicon'}}  glyphicon-chevron-down direction-arrow arrow_down" ng-click="sortBy('UserType', true)"></span>
+
+                                                </div>
+                                            </div>
+                                            <div style="width:30%;" id="searchsortorderTask">
+                                                
+                                                <div style="width:80%;" class="headcontainer">
+                                                    <input id="searchsortorderTask" type="search" placeholder="Sort Order" class="width-90 searchbox_height" ng-model="searchsortorderTask" />
+                                                    <span ng-show="searchsortorderTask.length>0" class="searchclear" ng-click="clearControl('searchsortorderTask')">X</span>
+                                                    <span class="{{orderBy=='SortOrder'&&!reverse?'glyphicon_active':'glyphicon'}}  glyphicon-chevron-up direction-arrow arrow_up" ng-click="sortBy('SortOrder', false)"></span>
+                                                    <span class="{{orderBy=='SortOrder'&&reverse?'glyphicon_active':'glyphicon'}}  glyphicon-chevron-down direction-arrow arrow_down" ng-click="sortBy('SortOrder', true)"></span>
+
+                                                </div>
+                                            </div>
+                                            <div style="width: 3%;"><div style="width: 80%"></div></div>
+
+                                            <div style="width: 4%;"><div style="width: 80%"></div></div>
+
+                                        </li>
+                                  <div class="container-new">
+                                        <li class="for-lis tdrows" ng-repeat="item in filteredItem = (TaskGroup | orderBy:orderBy:reverse | filter: search | filter:{Title:searchNameTask,UserType:searchUserTypeTask,Group:searchGroupTask,SortOrder:searchsortorderTask})">
+
+                                            <div style="width:3%;">
+                                                <img ng-if="item.Item_x0020_Cover!=undefined || item.Item_x005F_x0020_Cover!=null" class="AssignPriorityUserPhoto" title="{{item.Title}}" data-toggle="popover" data-trigger="hover" ng-src="{{item.Item_x005F_x0020_Cover}}" />
+                                                <!--<img ng-if="item.Item_x005F_x0020_Cover==undefined || item.Item_x005F_x0020_Cover==null" class="AssignPriorityUserPhoto" ng-src="https://www.shareweb.ch/site/ei/Style%20Library/Images/ContactPicture.jpg" />-->
+                                            </div>
+                                            <div style="width:30%;" class="padLR"> {{item.Title}}</div>
+                                            <div style="width:30%;" class="padLR"> {{item.UserType}}</div>
+                                            <div style="width:30%;" class="padLR"> {{item.SortOrder}}</div>
+                                            <div style="width:3%;" class="icontype display_hide padLR">
+                                                <a  class="hreflink">
+                                                    <img ng-click="EditUser(item)" ng-src="/_layouts/images/edititem.gif">
+                                                </a>
+                                            </div>
+                                            <div style="width:4%;" class="padLR"><a class="hreflink"  ng-click="removeItem(item,TaskGroup)"> <img ng-src="/_layouts/images/delete.gif" src="/_layouts/images/delete.gif"></a></div>
+                                        </li>
+                                   </div>
+                                </ul>
+                            
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>

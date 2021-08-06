@@ -1,0 +1,82 @@
+﻿<script src="https://unpkg.com/gojs/release/go-debug.js"></script>
+<script src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Online/Dashboard/CreatedDragDropFlowChart-test.js"></script>
+
+<script src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Services/alasql.min.js"></script>
+<script src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Services/main.js"></script>
+<script type="text/javascript"
+        src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Services/jquery.SPServices-2014.01.min.js"></script>
+<script type="text/javascript">
+    //  $(document).ready(function () {
+    function allowDropThis(i) {
+        i.preventDefault();
+    }
+
+    function dragThis(i) {
+        i.dataTransfer.setData("doggo", i.target.id);
+    }
+
+    function dropThis(i) {
+        i.preventDefault();
+        var data = i.dataTransfer.getData("doggo");
+        i.target.appendChild(document.getElementById(data));
+    }
+    // });
+
+</script>
+<style>
+    #fig1, #fig2 {
+        float: left;
+        width: 220px;
+        height: 220px;
+        margin: 20px;
+        padding: 20px;
+        border: 2px solid blue;
+    }
+</style>
+
+<div ng-controller="DragDropFlowChartController" ng-cloak>
+
+    <!--<div id="example_2"></div>
+    <h2>Drag and Drop</h2>
+
+    <p>Drag Doggo between these the two elements.</p>
+
+    <div id="fig1" ondrop="dropThis(event)" ondragover="allowDropThis(event)">
+        <img src="https://cdn.bitdegree.org/learn/pom-laptop.png?raw=true" draggable="true" ondragstart="dragThis(event)" id="drag1" width="220" height="220">
+    </div>
+
+    <div id="fig2" ondrop="dropThis(event)" ondragover="allowDropThis(event)"></div>-->
+    <div id="sample">
+        <div style="width: 100%; display: flex; justify-content: space-between">
+            <div id="myPaletteDiv" style="width: 250px; margin-right: 2px; background-color: #282c34; "></div>
+            <div id="myDiagramDiv" style="flex-grow: 1; height: 750px; background-color: #282c34;"></div>
+        </div>
+        <p>
+            <textarea id="mySavedModel" style="width:100%;height:300px"></textarea>
+            <button ng-click="printDiagram()">Print Diagram Using SVG</button>
+            <button id="SaveButton" ng-click="save()">Save</button>
+            <button ng-click="load()">Load</button>
+            Diagram Model saved in JSON format:
+        </p>
+        <!--<p>
+            The FlowChart sample demonstrates several key features of GoJS,
+            namely <a href="../intro/palette.html">Palette</a>s,
+            <a href="../intro/links.html">Linkable nodes</a>, Drag/Drop behavior,
+            <a href="../intro/textBlocks.html">Text Editing</a>, and the use of
+            <a href="../intro/templateMaps.html">Node Template Maps</a> in Diagrams.
+        </p>
+        <p>
+            Mouse-over a Node to view its ports.
+            Drag from these ports to create new Links.
+            Selecting Links allows you to re-shape and re-link them.
+            Selecting a Node and then clicking its TextBlock will allow
+            you to edit text (except on the Start and End Nodes).
+        </p>
+        <button id="SaveButton" onclick="save()">Save</button>
+        <button onclick="load()">Load</button>
+        Diagram Model saved in JSON format:
+        <textarea id="mySavedModel" style="width:100%;height:300px"></textarea>
+        <button onclick="printDiagram()">Print Diagram Using SVG</button>-->
+    </div>
+</div>
+

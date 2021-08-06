@@ -1,0 +1,339 @@
+﻿<script type="text/javascript" src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Online/Dashboard/Dashboard-popup.js"></script>
+<style>
+    .editIcon{
+         float:right;
+         padding-right:10px;
+    }
+    .flex-container {
+        display: -moz-inline-grid !important;
+    }
+
+    .data-para img {
+        width: 12px;
+    }
+
+    .nopadding {
+        padding: 0;
+    }
+
+    .panel-primary-head .panel-heading {
+        background: #0072c6;
+        color: #ffffff !important;
+    }
+	 
+   .panel-heading.bg-green {
+    background: #2d7437;
+  }
+    h3.panel-title {
+        color: #ffffff !important;
+        margin-bottom: 0;
+        padding-bottom: 0;
+        line-height: 10px;
+    }
+
+    .panel-heading {
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
+        padding: 12px 20px 12px;
+        position: relative;
+    }
+
+    .dashboard .col-md-4 {
+        padding: 0 2px;
+    }
+
+    .dashboard .col-md-8 {
+        padding: 0 2px;
+    }
+
+    .dashboard .col-md-6 {
+        padding: 0 2px;
+    }
+
+    .panel {
+        margin-bottom: 15px;
+    }
+
+    .panel-title {
+        text-align: center;
+    }
+
+    .blocks .panel-body {
+        -moz-border-bottom-colors: none;
+        -moz-border-left-colors: none;
+        -moz-border-right-colors: none;
+        -moz-border-top-colors: none;
+        border-color: currentcolor #dddddd #dddddd;
+        border-image: none;
+        border-style: none solid solid;
+        border-width: 0 1px 1px;
+    }
+
+    .blocks {
+        box-shadow: 0 5px 6px 0 #d7d7d7;
+        transition: all 0.3s ease 0s;
+    }
+
+    table:hover {
+        cursor: pointer;
+    }
+
+    #testDiv1,
+    #testDiv2,
+    #testDiv3,
+    #testDiv4,
+    #testDiv5,
+    #testDiv6 {
+        border: medium none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .table > tbody > tr > td,
+    .table > tbody > tr > th,
+    .table > tfoot > tr > td,
+    .table > tfoot > tr > th,
+    .table > thead > tr > td,
+    .table > thead > tr > th {
+        padding: 6px 0 6px 6px;
+    }
+
+    .table > tbody > tr > td {
+        font-size: 13px;
+        color: #333333;
+    }
+
+    .data-para {
+        height: 20px;
+        margin: 0px !important;
+        overflow: hidden;
+        width: 100%;
+    }
+
+    .img-para {
+        height: 20px;
+        margin: 0px !important;
+        width: 100%;
+    }
+
+    .tables_ui ul li {
+        min-width: 200px;
+    }
+
+    a.pull-right {
+        position: absolute;
+        top: -22px;
+        right: 20px;
+    }
+
+    .container {
+        width: 1280px !important;
+        max-width: 1260px;
+    }
+
+    .dashboard {
+        margin-left: -15px;
+    }
+
+    .userPhoto {
+        width: 30px !important;
+        border-radius: 20px;
+        margin-top: -5px;
+        max-height: 30px;
+        padding-right: 3px;
+    }
+
+    .AssignUserPhoto {
+        width: 75px !important;
+        border-radius: 45px;
+        height: 73px;
+    }
+
+    .AssignPriorityUserPhoto {
+        width: 61px !important;
+        border-radius: 6px;
+        height: 61px;
+        margin: 6px 17px;
+    }
+
+    #pull-text {
+        font-size: 13px;
+        float: right;
+        cursor: pointer;
+    }
+
+        #pull-text:hover {
+            color: #FFF !important;
+            text-decoration: underline;
+        }
+
+    .sp-peoplepicker-topLevel {
+        border: none;
+        padding: 0;
+        width: 100% !important;
+    }
+
+    .assignToDropPanel {
+        height: 75px;
+        border: 1px solid #ccc;
+    }
+	.ProirityAssignedUserPhoto {
+    width: 43px !important;
+    border-radius: 20px;
+    padding-right: 3px;
+    height: 43px;
+}
+ .data-para {
+    font-size: 12px;
+    margin-bottom: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 210px;
+}
+ .data-big-para {
+    font-size: 12px;
+    margin-bottom: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 380px;
+}
+  .data-400-para {
+    font-size: 12px;
+    margin-bottom: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 400px;
+}
+  .data-300-para {
+    font-size: 12px;
+    margin-bottom: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 300px;
+}
+.form-control {
+    height: 26px;
+    font-size: 13px;
+}
+
+.sharewebTooltip-wrap {
+  cursor: help;
+  display: inline-block;
+  position: relative;
+}
+
+.sharewebTooltipVisible:before {
+  border-style: solid;
+  content: '';
+  display: block;
+  height: 0;
+  position: absolute;
+  width: 0;
+}
+.sharewebTooltipVisible {
+    background-color: #000000e3;
+    border-radius: 0px;
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3);
+    color: #ffffff;
+    font-size: 13px;
+    opacity: 1;
+    padding: 10px;
+    position: absolute;
+    text-align: left;
+    visibility: visible;
+    width: 300px;
+    z-index: 999;
+	right: 114px;
+}
+
+.sharewebTooltip {
+  background-color: #00cd99;
+  border-radius: 4px;
+  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3);
+  color: #111;
+  font-size: 13px;
+  opacity: 0;
+  padding: 10px;
+  position: absolute;
+  text-align: center;
+  visibility: hidden;
+  width: 500px; /* Set the width to the largest option */
+  z-index: 999;
+}
+
+.sharewebTooltipVisible:before {
+    border-style: solid;
+    content: '';
+    display: block;
+    height: 0;
+    position: absolute;
+    width: 0;
+    border-color: transparent #000000e3 transparent transparent;
+    border-width: 8px 11px 8px 0;
+    top: calc(50% - 85px);
+    left: -10px;
+	right:auto;
+}
+
+.sharewebTooltipVisible.nt-left-bottom:before,
+.sharewebTooltipVisible.nt-right-bottom:before {
+  top: calc(100% - 24px);
+}
+
+.sharewebTooltip.nt-small {
+  max-width: 280px;
+}
+</style>
+
+<div ng-controller="TaskDashboardController" ng-cloak>
+    <div class="container dashboard">
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="panel panel-primary-head blocks" id="t_draggable1">
+                    <div class="panel-heading bg-darkgreen">
+                        <h3 class="panel-title">Today<span style="margin-left:5px;">({{TodayTasks.length}})</span></h3>
+                    </div>
+                    <div class="panel-body list-group nopadding table-responsive" id="testDiv1">
+                        <table class="tables_ui table table-info table-striped mb30">
+                            <thead>
+                                <tr>
+                                    <th style="width:70%;"><input type="text" id="searchName" placeholder="Search Name" class="form-control" ng-model="searchTodayTaskName" /></th>
+                                  
+                                    <th><input type="text" id="searchName" placeholder="Search Status" class="form-control" ng-model="searchTodayStatus" /></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ui-draggable="true" drag="item" class="itemRow" ng-repeat="item in filtered = (TodayTasks | filter:{Title:searchTodayTaskName,Status:searchTodayStatus})">
+                                    <td class="col-md-6 sharewebTooltip-wrap">
+                                        <p class="data-para">
+                                            <a ng-href="https://hhhhteams.sharepoint.com/sites/HHHHTeams/sp/SitePages/Task-Profile.aspx?taskId={{item.Id}}&Site={{item.siteType}}" target="_blank" class="ng-binding" href="https://hhhhteams.sharepoint.com/sites/HHHHTeams/sp/SitePages/Task-Profile.aspx?taskId={{item.Id}}&Site={{item.siteType}}">
+                                                {{item.Title}}
+                                            </a>
+											 <div class="sharewebTooltip nt-right nt-small">
+											   <p><strong>Title:</strong>  {{item.Title}}</p>
+											   <p><strong>Due Date:</strong>  {{item.DueDate}}</p>
+											   <p><strong>% Complete:</strong>  {{item.PercentComplete}}</p>
+											   <p><strong>Priority:</strong>  {{item.Priority}}</p>
+											   <p><strong>Task Leader:</strong>  {{item.taskLeader}}</p>
+											 </div>
+                                        </p>
+                                    </td>
+                                 
+                                    <td class="col-md-4" ng-value="{{item.Id}}">
+                                        <p class="col-sm-8 no-padding">{{item.Status}}</p>
+                                        <a href="javascript:void(0)" title="Edit" data-toggle="modal" ng-click="EditTask(item)"><img src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/SiteCollectionImages/ICONS/32/edititem.gif"> </a>
+                                        </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>       
+    </div>   
+</div>

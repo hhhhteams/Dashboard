@@ -1,0 +1,85 @@
+﻿<script src="/site/ei/Style%20Library/js/angular/Services/main.js"></script>
+<script type="text/ecmascript" src="/site/Joint/_layouts/15/clienttemplates.js"></script>
+<script type="text/ecmascript" src="/site/Joint/_layouts/15/clientforms.js"></script>
+<script type="text/ecmascript" src="/site/Joint/_layouts/15/clientpeoplepicker.js"></script>
+<script type="text/ecmascript" src="/site/Joint/_layouts/15/autofill.js"></script>
+
+<script src="https://hhhhteams.sharepoint.com/sites/HHHHTeams/Style%20Library/js/angular/Online/Dashboard/CreateTaskUser.js"></script>
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<style type="text/css">
+    #editsmatmetadataprogressbar {
+        width: 100%;
+        height: 100%;
+        top: 0px;
+        left: 0px;
+        position: fixed;
+        display: block;
+        opacity: 0.7;
+        z-index: 99;
+        text-align: center;
+        background: #fff;
+    }
+
+
+    .panel-body {
+        padding: 0px 5px !important;
+		
+   
+ 
+    }
+</style>
+<div ng-controller="CreateTaskUserController" ng-cloak>
+    <div ng-cloak>
+        <div class="panel panel-default" ng-cloak>
+            <div class="panel-title">
+                <button type="button" class="close" data-dismiss="modal" ng-click="cancelCreate()" style="min-width: 10px;">&times;</button>
+                
+                <h3 ng-if="createType=='taskgroup'">
+                    Create New Group
+                   
+                </h3>
+
+            </div>
+            <div class="panel-body">
+                <div>
+                    <div class="Edit_smart">
+                        <div id="table-wrapper">
+                            <div id="table-scroll">
+                                <div class="">
+                                    <div id="basicinfo" class="tab-pane fade in active">
+                                        <div class="container fixed-divPanelBody imageinfo_border BTop padL-0 PadR0 tab-content">
+                                            <ng-form name="UserForm" novalidate role="form">
+                                                <div class="col-sm-12 no-padding">
+                                                    <div class="form-group mt-10">
+                                                       
+                                                        <div class="col-sm-8 padL-0 PadR0" ng-if="createType=='taskgroup'">
+                                                            <label class="full_width" ng-bind-html="GetColumnDetails('Title') | trustedHTML"><b class="span-error">*</b> </label>
+                                                            <input class="form-control text-box" type="text" autocomplete="off" id="txtTitle"   ng-required="true" ng-model="User.UserTitle" />
+                                                        </div>
+														
+                                                        <div class="col-sm-4  form-group" ng-if="createType=='taskgroup'">
+                                                            <label class="full_width" ng-bind-html="GetColumnDetails('SortOrder') | trustedHTML"><b class="span-error">*</b> </label>
+                                                            <input class="form-control text-box" type="text" autocomplete="off" ng-pattern="/^[0-9]+([,.][0-9]+)?$/" id="txtTitle" ng-model="User.SortOrder" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                             </ng-form>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary"  ng-click="createUser(User)">Save</button>
+                                        <button type="button" class="btn btn-default" ng-click="cancelCreate()">Cancel</button>
+                                    </div>
+                               </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+	
+  
+    </div>
+</div> 
+
+
